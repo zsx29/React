@@ -1,43 +1,43 @@
 /* eslint-disable */
 
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 /*
 
-  1. state
+  * state
     - 변수 대신 쓰는 데이터 저장공간
     - useState()를 이용해서 만들어야한다.
     - state는 UI의 현재상태를 보관하는 저장소역할
     - state 데이터는 =(등호)로 직접 수정하지 말것!
+    !- state 만들 땐 state를 필요로하는 컴포넌트들 중 가장 최상위 컴포넌트에 보관할 것
   
-  2. state 생성하는 방법
+  * state 생성하는 방법
     - 상단에 {useState} 라이브 러리를 추가해준다.
     - let[a, b] = useState("남자 코트 추천")
     - a : "남자 코트 추천"
     - b ; "남자 코트 추천" 을 변경하는 함수가 들어가 있다.
  
-  3. state에 데이터를 저장하는 이유
+  * state에 데이터를 저장하는 이유
     - Web이 App처럼 동작하게 만들고 싶어서 그렇다.
     - state는 변경이 되면 HTML이 자동으로 재렌더링이 된다.  
     - 새로고침 없이도 부드럽게 변경이 되기 때문이다.
     - 중요한 데이터는 반드시 state에 넣어준다
     - 자주 바뀌는, 중요한 데이터를 변수 말고 state에 저장해서 사용한다.
 
-  4. state 수정
+  * state 수정
     - 복사본을 만들어서 수정하라(deep copy)
 
-  5. Componnent 문법
+  * Componnent 문법
     - HTML을 한 단어로 줄여서 쓸 수 있는 방법이다.
     - 반드시 대문자로 시작을 한다.
     - 소괄호 안에다가 HTML 문법을 사용한다.
     - 반복적으로 출현하는것은 Componnent로 묶어준다.
 
-  6. Modal
+  * Modal
     - 리액트에선 UI를 만들 떄 state 데이터를 이용한다.
 
-  7. Map(반복문)
+  * Map(반복문)
     - array 내의 모든 데이터에 똑같은 작업을 시켜주고 싶을 때 .map()
     - 사용방법
       = {
@@ -49,28 +49,28 @@ import "./App.css";
         a : array 안에 있던 하나하나의 데이터를 의미한다.
     - map 반복문으로 돌린 HTML에는 key={}가 필요하다(warning이 생기지 않는다)
 
-  8. props
+  * props
     - props로 전송해줘야 자식 컴포넌트는 부모 컴포넌트가 가진 state 사용가능
     - 사용방법
       1. <자식컴포넌트 작명 = {state명}/>
       2. 자식컴포넌트에서 props 파라미터 입력 후 사용
 
-  9. 각각 다른 모달창 제목 띄우는법
+  * 각각 다른 모달창 제목 띄우는법
     - 몇번째 제목을 눌렀는지 상태정보를 state에 저장하고
       state가 0일때 0번째 제목 출력
       state가 1일때 1번째 제목 출력...
 
-  10. UI만드는 법 :
-      1. UI와 관련된 중요 정보들을 state로 저장해놓고
-      2. state에 따라서 UI가 수정되게 만들면 된다.
+  * UI만드는 법 :
+    1. UI와 관련된 중요 정보들을 state로 저장해놓고
+    2. state에 따라서 UI가 수정되게 만들면 된다.
 
-  11. input
+  * input
     - 사용자가 input에 입력한 값을 입력값 state로 저장한다
 
-  12. 글 발행기능 만들기
-    - (1) 사용자가 입력한 글 변수로 저장하기 (왜? 중요한 데이터니까)
-    - (2) 저장버튼을 누르면 그 변수를 어디에 추가함
-    - (3) 버튼을 누르면 입력한 글 state를 글제목 state에 추가
+  * 글 발행기능 만들기
+    1. 사용자가 입력한 글 변수로 저장하기 (왜? 중요한 데이터니까)
+    2. 저장버튼을 누르면 그 변수를 어디에 추가함
+    3. 버튼을 누르면 입력한 글 state를 글제목 state에 추가
     
     
 
@@ -161,7 +161,7 @@ function App() {
 
 /*
 
-  ※ 예전 component 작성하는 방법
+  * 예전 component 작성하는 방법
     - class   : 변수/ 함수 보관하는 덩어리
     - extends : 오른쪽에 있는 놈의 성질을 물려받겠습니다.
     - state는 constructor 안에 작성한다.
@@ -169,7 +169,7 @@ function App() {
 
 */
 
-// 옛날 Component
+//* 옛날 Component
 class Profile extends React.Component{
   constructor(){
     super();
@@ -192,7 +192,7 @@ class Profile extends React.Component{
   }
 }
 
-// 최신 Component
+//* 최신 Component
 function Profile2(params) {
   let [name, nameCh] = useState(["박재형"]);
   let [age, ageCh] = useState(27);
