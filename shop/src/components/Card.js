@@ -1,14 +1,12 @@
 import { useState } from "react";
+import { Link, Route, Switch } from "react-router-dom";
 
 function Card(props) {
     return (
       <div className="col-md-4">
-        <img
-          src={
-            "https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg"
-          }
-          width="100%"
-        ></img>
+        <Link to={"/detail/" + props.i}>
+          <img src={ "https://codingapple1.github.io/shop/shoes" + (props.i + 1) + ".jpg" } width="100%"></img>
+        </Link>
         <h4>
           <b>{props.shoes.title}</b>
         </h4>

@@ -1,13 +1,16 @@
 /*eslint-disable*/ 
 
+// lib-Grp
 import './App.css';
 import { useState } from 'react';
 import { Link, Route, Switch } from 'react-router-dom'
+import axios from 'axios';
 
 // Components-Grp
 import Data   from './components/Data.js';
 import Detail from './components/Detail.js';
 import Card   from './components/Card.js';
+import Login   from './components/Login';
 
 // Bootstrap-import
 import {
@@ -17,7 +20,8 @@ import {
   NavDropdown,
   Form,
   FormControl,
-  Jumbotron
+  Jumbotron,
+  Badge
 } from "react-bootstrap";
 
 
@@ -85,18 +89,45 @@ import {
 
 function App() {
 
-  let [shoes, shoesCh] = useState(Data);
+  // shoes Data
+  let [shoes, setShoes] = useState(Data);
+
+  // ajax -GET- success
+  let [more, setMore] = useState(true);
+  function More(params) {
+    return(
+      <Button variant="primary" onClick={() => { 
+        setMore(false),
+        axios.get("https://codingapple1.github.io/shop/data2.json")
+        .then((result) => { setShoes([...shoes, ...result.data]) })
+        .catch(() => { setError(true) });
+      }}>
+        More <Badge variant="light">9+</Badge>
+        <span className="sr-only">unread messages</span>
+      </Button>
+    );
+  }
+
+  // ajax -GET- error
+  let [error, setError] = useState(false);
+  function Error(params) {
+    return(
+      <div className="my-alert-error">
+        <p>😢데이터 요청실패😢</p>
+      </div>
+    );
+  }
 
   return (
     <div className="App">
       <div className="App-header">
         <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className="nav">
-          <Navbar.Brand href="#home">PogbaShoes</Navbar.Brand>
+          <Navbar.Brand href="/">PogbaShoes</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link><Link to="/">Home</Link></Nav.Link>
-              <Nav.Link><Link to="/detail">Detail</Link></Nav.Link>
+              <Nav.Link><Link to="/login">Login</Link></Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -134,25 +165,43 @@ function App() {
             <div className="container">
               <div className="row">
                 {
-                  // shoes 라는 데이터 갯수만큼 HTML을 생성해주세요~!
                   shoes.map((a, i) => {
                     return <Card shoes={ a } i={ i } key={i}/>
                   })
                 }
               </div>
-            </div> 
+              <br/><br/>
+                {
+                  more === true
+                  ? <More></More>
+                  : null
+                }
+                {
+                  error === true
+                  ? <Error></Error>
+                  : null
+                }
+              <br/><br/>
+            </div>
           </Route>
 
           <Route path="/detail/:id">
             <Detail shoes={ shoes }></Detail>
           </Route>
 
+          <Route path="/login">
+            <Login></Login>
+          </Route>
+
           <Route path="/:id"></Route>
+
 
         </Switch>
       </div>
     </div>
   );
 } // App-end...
+
+
 
 export default App;
